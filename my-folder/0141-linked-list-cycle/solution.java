@@ -12,17 +12,16 @@
 import java.util.HashSet;
 
 public class Solution {
+    
     public boolean hasCycle(ListNode head) {
-        ListNode currentNode = head;
-        HashSet set = new HashSet();
-        while (currentNode != null && currentNode.next != null) {
-            if (set.contains(currentNode)) {
+        HashSet<ListNode> visited = new HashSet<>();
+        while (head != null) {
+            visited.add(head);
+            head = head.next;
+            if (visited.contains(head)) {
                 return true;
-            } else {
-                set.add(currentNode);
-                currentNode = currentNode.next;
             }
         }
-        return false;   
+        return false;
     }
 }
