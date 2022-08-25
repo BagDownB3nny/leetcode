@@ -1,30 +1,19 @@
-import java.util.Hashtable;
+import java.util.HashMap;
 
 class Solution {
-    static Hashtable<Integer, Integer> h = new Hashtable<>();
+    HashMap<Integer, Integer> memo = new HashMap<>();
+    
     public int climbStairs(int n) {
-        if (n==0) {
+        if (memo.containsKey(n)) {
+            return memo.get(n);
+        }  else if (n == 1) {
             return 1;
-        } else if (n < 0) {
-            return 0;
+        } else if (n == 0) {
+            return 1;
         } else {
-            int x;
-            int y;
-            Integer xs = h.get(n-1);
-            Integer ys = h.get(n-2);
-            if (xs != null) {
-                x = xs;
-            } else {
-                x = climbStairs(n-1);
-                h.put(n-1, x);
-            }
-            if (ys != null) {
-                y = ys;
-            } else {
-                y = climbStairs(n-2);
-                h.put(n-2, y);
-            }
-            return x + y;
+            int ans = climbStairs(n - 1) + climbStairs(n - 2);
+            memo.put(n, ans);
+            return ans;
         }
     }
 }
