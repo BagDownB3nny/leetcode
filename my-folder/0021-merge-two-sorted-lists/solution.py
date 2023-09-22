@@ -3,6 +3,7 @@
 #     def __init__(self, val=0, next=None):
 #         self.val = val
 #         self.next = next
+
 class Solution(object):
     def mergeTwoLists(self, list1, list2):
         """
@@ -10,18 +11,20 @@ class Solution(object):
         :type list2: Optional[ListNode]
         :rtype: Optional[ListNode]
         """
-        new_list = current = ListNode()
-        while list1 and list2:
+        
+        new_list = ListNode()
+        start = new_list
+        while list1 != None and list2 != None:
             if list1.val < list2.val:
-                current.next = list1
-                current = list1
+                new_list.next = list1
+                new_list = new_list.next
                 list1 = list1.next
             else:
-                current.next = list2
-                current = list2
+                new_list.next = list2
+                new_list = new_list.next
                 list2 = list2.next
-        if list1:
-            current.next = list1
-        elif list2:
-            current.next = list2
-        return new_list.next
+        if list1 != None:
+            new_list.next = list1
+        elif list2 != None:
+            new_list.next = list2
+        return start.next
